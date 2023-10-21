@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placid's Digital Haven</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #typewriter-text {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div id="typewriter-text"></div>
+    <audio id="typewriter-audio" src="typewriter.mp3" volume="1.0"></audio>
+    
+    <script>
+        const text = [
+            "Welcome to Placid's Digital Haven",
+            "Placid, An Undergraduate Student at Kathmandu University, School of Management",
+            "Event Management & Logistics",
+            "Esports & Gaming",
+            "Nature & Treks",
+            "And What Not ... ... ... ... ...."
+        ];
+        
+        const delay = 50;
+        const audio = document.getElementById("typewriter-audio");
+        const typewriter = document.getElementById("typewriter-text");
+        
+        function typeWriter(i, j) {
+            if (i < text.length) {
+                if (j < text[i].length) {
+                    typewriter.innerHTML += text[i][j];
+                    j++;
+                    audio.play(); // Play the typewriter sound
+                    setTimeout(() => typeWriter(i, j), delay);
+                } else {
+                    typewriter.innerHTML += "<br>";
+                    i++;
+                    setTimeout(() => typeWriter(i, 0), delay * 2);
+                }
+            } else {
+                // Typing is complete, redirect to homepage.html
+                setTimeout(() => {
+                    window.location.href = "homepage.html";
+                }, 2000); // Delay before redirection (2 seconds)
+            }
+        }
+        
+        typeWriter(0, 0);
+    </script>
+</body>
+</html>
